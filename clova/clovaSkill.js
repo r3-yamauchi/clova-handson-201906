@@ -45,14 +45,25 @@ module.exports = clova.Client
         const slots = responseHelper.getSlots();
         console.log(slots);
         
-        let placeSpeech = [
-          clova.SpeechBuilder.createSpeechText('海外のおすすめプランをボットに送信しました。ご確認くださいませ。')
-        ];
+        const placeSpeech = [];
+        console.log(slots.Place);
+        
         // ユーザID取得
         const { userId } = responseHelper.getUser();
         
         // オススメのプランをBOTへ送信
-        await sendLineBot(userId, jsonData[0]);
+        await sendLineBot(userId, jsonData[0])
+          .then(() => {
+            if (slots.Place === '海外') {
+              placeSpeech.push(clova.SpeechBuilder.createSpeechText('海外のおすすめプランをボットに送信しました。ご確認くださいませ。'));
+            } else {
+              placeSpeech.push(clova.SpeechBuilder.createSpeechText('国内のおすすめプランをボットに送信しました。ご確認くださいませ。'));
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            placeSpeech.push(clova.SpeechBuilder.createSpeechText('botを連携させてください。'));
+          });
         
         responseHelper.setSpeechList(placeSpeech);
         responseHelper.endSession();
@@ -337,12 +348,7 @@ async function sendLineBot(userId, jsonData) {
         ]
       }
     }
-    ]).then(() => {
-    console.log('LINE Success');
-    }).catch((err) => {
-    console.log('LINE Error');
-    console.log(err);
-    });
+    ]);
 }
 
 // リプロント
