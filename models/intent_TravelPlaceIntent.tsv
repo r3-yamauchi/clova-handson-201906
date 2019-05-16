@@ -1,4 +1,7 @@
+[INTENT SLOT]
+Place	Place
+
 [INTENT EXPRESSION]
-海外に行きたい
-海外です
-海外
+<Place>海外</Place>に行きたい
+<Place>海外</Place>です
+<Place>海外</Place>
