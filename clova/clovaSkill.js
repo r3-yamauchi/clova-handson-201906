@@ -43,18 +43,24 @@ module.exports = clova.Client
       
       case 'TravelPlaceIntent':
         const slots = responseHelper.getSlots();
-        console.log(slots);
+        const place = slots.Place;
         
         const placeSpeech = [];
         console.log(slots.Place);
         
         // ユーザID取得
         const { userId } = responseHelper.getUser();
+
+        let id = 0;
+        if (place === '海外') {
+          id = Math.floor( Math.random() * jsonData.length);
+        }
+        // TODO: 国内データの取得
         
         // オススメのプランをBOTへ送信
-        await sendLineBot(userId, jsonData[0])
+        await sendLineBot(userId, jsonData[id])
           .then(() => {
-            if (slots.Place === '海外') {
+            if (place === '海外') {
               placeSpeech.push(clova.SpeechBuilder.createSpeechText('海外のおすすめプランをボットに送信しました。ご確認くださいませ。'));
             } else {
               placeSpeech.push(clova.SpeechBuilder.createSpeechText('国内のおすすめプランをボットに送信しました。ご確認くださいませ。'));
