@@ -51,14 +51,22 @@ module.exports = clova.Client
         // ユーザID取得
         const { userId } = responseHelper.getUser();
 
-        let id = 0;
+        // 国内か海外の選択
+        let type;
         if (place === '海外') {
-          id = Math.floor( Math.random() * jsonData.length);
+          type = "overseas";
+        } else if (place === "国内") {
+          type = "domestic";
+        } else {
+          placeSpeech.push(clova.SpeechBuilder.createSpeechText('聞き取れませんでした。もう一度お願いします。'));
+          responseHelper.setSpeechList(placeSpeech);
+          return;
         }
-        // TODO: 国内データの取得
+
+        const id = Math.floor( Math.random() * jsonData[type].length);
         
         // オススメのプランをBOTへ送信
-        await sendLineBot(userId, jsonData[id])
+        await sendLineBot(userId, jsonData[type][id])
           .then(() => {
             if (place === '海外') {
               placeSpeech.push(clova.SpeechBuilder.createSpeechText('海外のおすすめプランをボットに送信しました。ご確認くださいませ。'));
