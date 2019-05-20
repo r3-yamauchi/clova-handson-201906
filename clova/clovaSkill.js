@@ -63,8 +63,6 @@ module.exports = clova.Client
           return;
         }
 
-        // const id = Math.floor( Math.random() * jsonData[type].length);
-        
         // オススメのプランをBOTへ送信
         await sendLineBot(userId, jsonData[type])
           .then(() => {
@@ -106,7 +104,7 @@ async function sendLineBot(userId, jsonData) {
         "altText": "プランを送信しました。",
         "contents": {
           "type": "carousel",
-          "contents": getPlanCarousel()
+          "contents": getPlanCarousel(jsonData)
         }
       }
     ]);
@@ -219,18 +217,13 @@ const getPlanJson = (jsonData) => {
 }
 
 const getPlanCarousel = (jsonData) => {
-  
-  const planTemplateJson = 
-  
-  random(3, jsonData.length)
-  const planJosn = getPlanJson(jsonData[0])
-  
-  
-  
-  
-  return [
-    
-  ]
+  const planJsons = []
+  for (let i = 0; i < 3; i++) {
+    const randomIndex = random(0, jsonData.length).toFixed(0)
+    planJsons.push(getPlanJson(jsonData[randomIndex]))
+    jsonData.splice(randomIndex, 1)
+  }
+  return planJsons
 }
 
 
