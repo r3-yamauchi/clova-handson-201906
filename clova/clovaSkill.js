@@ -8,6 +8,7 @@ const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.CHANNEL_SECRET
 };
+const base_url = process.env.BASE_URL;
 
 const client = new line.Client(config);
 
@@ -106,7 +107,7 @@ async function sendLineBot(userId, jsonData) {
     // ツアー名
     const tour = jsonData['tour'];
     // ツアーイメージ
-    const tourImageUrl = jsonData['tourImageUrl'];
+    const tourImageUrl = base_url + jsonData['tourImageUrl'];
     // 場所
     const place = jsonData['place'];
     // 値段
@@ -116,13 +117,13 @@ async function sendLineBot(userId, jsonData) {
     // ホテル名
     const hotel = jsonData['hotel'];
     // ホテルイメージ
-    const hotelImageUrl = jsonData['hotelImageUrl'];
+    const hotelImageUrl = base_url + jsonData['hotelImageUrl'];
     // LIFFでホテル詳細
     const hotelLiff = process.env.HOTEL_LIFF_URI + '?hotel=' + encodeURIComponent(hotel);
     // 航空会社
     const airline = jsonData['airline'];
     // 航空会社イメージ
-    const airlineImageUrl = jsonData['airlineImageUrl'];
+    const airlineImageUrl = base_url + jsonData['airlineImageUrl'];
     // LIFFで航空会社詳細
     const airlineLiff = process.env.AIRLINE_LIFF_URI + '?airline=' + encodeURIComponent(airline);
     
