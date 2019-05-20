@@ -16,7 +16,7 @@ module.exports = ( req, res ) => {
                 .sendMessages([
                   {
                     type: 'text',
-                    text: '申込'
+                    text: '支払い'
                   }
                 ])
                 .then(function() {
