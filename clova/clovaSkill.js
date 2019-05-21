@@ -8,6 +8,7 @@ const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.CHANNEL_SECRET
 };
+const base_url = process.env.BASE_URL;
 
 const client = new line.Client(config);
 
@@ -138,7 +139,7 @@ const getPlanJson = (jsonData) => {
     },
     "hero": {
       "type": "image",
-      "url": jsonData.tourImageUrl,
+      "url": base_url + jsonData.tourImageUrl,
       'size': 'full',
       'aspectRatio': '20:13',
       'aspectMode': 'cover'

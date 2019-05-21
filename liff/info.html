@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <title>申込情報を入力</title>
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script>
+      window.onload = function (e) {
+        // sendにclickイベントを追加
+        document.getElementById('send').addEventListener('click', function () {
+          // BOTへ送信
+          liff
+            .sendMessages([
+              {
+                type: 'text',
+                text: '支払い'
+              }
+            ])
+            .then(function () {
+              liff.closeWindow();
+            })
+            .catch(function (error) {
+              window.alert('もう一度入力してください。');
+            });
+        });
+      };
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+<!-- 申し込みに必要な情報を入力 -->
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="name">名前</label>
+            <input id="name" type="text" class="form-control" placeholder="名前を入力して下さい">
+        </div>
+        <button id="send" type="submit" class="btn btn-primary btn-lg btn-block">申込</button>
+    </form>
+</div>
+</body>
+</html>

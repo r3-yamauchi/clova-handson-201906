@@ -31,10 +31,10 @@ https://xxx.ngrok.io/linebot
 
 7. LIFFを設定する  
 ・エンドポイントURLに設定する  
-https://xxx.ngrok.io/info  
-https://xxx.ngrok.io/tour  
-https://xxx.ngrok.io/hotel  
-https://xxx.ngrok.io/airline  
+https://xxx.ngrok.io/info.html  
+https://xxx.ngrok.io/tour.html  
+https://xxx.ngrok.io/hotel.html  
+https://xxx.ngrok.io/airline.html  
 https://xxx.ngrok.io/linepay/reserve  
 
 8. 「.env」ファイルを設定する   
