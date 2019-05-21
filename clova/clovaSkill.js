@@ -63,10 +63,8 @@ module.exports = clova.Client
           return;
         }
 
-        const id = Math.floor( Math.random() * jsonData[type].length);
-        
         // オススメのプランをBOTへ送信
-        await sendLineBot(userId, jsonData[type][id])
+        await sendLineBot(userId, jsonData[type])
           .then(() => {
             if (place === '海外') {
               placeSpeech.push(clova.SpeechBuilder.createSpeechText('海外のおすすめプランをボットに送信しました。ご確認くださいませ。'));
@@ -100,270 +98,135 @@ module.exports = clova.Client
 
 // オススメのプランをBOTへ送信
 async function sendLineBot(userId, jsonData) {
-    // jsonデータからプランを取得
-    // LIFFで申込情報入力
-    const informationLiff = process.env.INFO_LIFF_URI;
-    // ツアー名
-    const tour = jsonData['tour'];
-    // ツアーイメージ
-    const tourImageUrl = jsonData['tourImageUrl'];
-    // 場所
-    const place = jsonData['place'];
-    // 値段
-    const price = jsonData['price'];
-    // LIFFでツアー詳細
-    const tourLiff = process.env.TOUR_LIFF_URI + '?tour=' + encodeURIComponent(tour);
-    // ホテル名
-    const hotel = jsonData['hotel'];
-    // ホテルイメージ
-    const hotelImageUrl = jsonData['hotelImageUrl'];
-    // LIFFでホテル詳細
-    const hotelLiff = process.env.HOTEL_LIFF_URI + '?hotel=' + encodeURIComponent(hotel);
-    // 航空会社
-    const airline = jsonData['airline'];
-    // 航空会社イメージ
-    const airlineImageUrl = jsonData['airlineImageUrl'];
-    // LIFFで航空会社詳細
-    const airlineLiff = process.env.AIRLINE_LIFF_URI + '?airline=' + encodeURIComponent(airline);
-    
     await client.pushMessage(userId, [
-    {
-      "type": "flex",
-      "altText": "プランを送信しました。",
-      "contents": {
-        "type": "carousel",
-        "contents": [
-          {
-            "type": "bubble",
-            "header": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": place
-                }
-              ]
-            },
-            "hero": {
-              "type": "image",
-              "url": tourImageUrl,
-              'size': 'full',
-              'aspectRatio': '20:13',
-              'aspectMode': 'cover'
-            },
-            "body": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": price
-                }
-              ]
-            },
-            "footer": {
-              "type": "box",
-              "layout": "vertical",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "button",
-                  "style": "primary",
-                  "action": {
-                    "type": "uri",
-                    "label": "申込情報入力",
-                    "uri": informationLiff
-                  }
-                }
-              ]
-            },
-            "styles": {
-              "header": {
-                "backgroundColor": "#00ffff"
-              },
-              "hero": {
-                "separator": true,
-                "separatorColor": "#000000"
-              },
-              "footer": {
-                "separator": true,
-                "separatorColor": "#000000"
-              }
-            }
-          },
-          {
-            "type": "bubble",
-            "header": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": tour
-                }
-              ]
-            },
-            "body": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "日程"
-                }
-              ]
-            },
-            "footer": {
-              "type": "box",
-              "layout": "vertical",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "詳細へ",
-                    "uri": tourLiff
-                  }
-                }
-              ]
-            },
-            "styles": {
-              "header": {
-                "backgroundColor": "#00ffff"
-              },
-              "hero": {
-                "separator": true,
-                "separatorColor": "#000000"
-              },
-              "footer": {
-                "separator": true,
-                "separatorColor": "#000000"
-              }
-            }
-          },
-          {
-            "type": "bubble",
-            "header": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "ホテル"
-                }
-              ]
-            },
-            "hero": {
-              "type": "image",
-              "url": hotelImageUrl,
-              'size': 'full',
-              'aspectRatio': '20:13',
-              'aspectMode': 'cover'
-            },
-            "body": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": hotel
-                }
-              ]
-            },
-            "footer": {
-              "type": "box",
-              "layout": "vertical",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "詳細へ",
-                    "uri": hotelLiff
-                  }
-                }
-              ]
-            },
-            "styles": {
-              "header": {
-                "backgroundColor": "#00ffff"
-              },
-              "hero": {
-                "separator": true,
-                "separatorColor": "#000000"
-              },
-              "footer": {
-                "separator": true,
-                "separatorColor": "#000000"
-              }
-            }
-          },
-          {
-            "type": "bubble",
-            "header": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "航空会社"
-                }
-              ]
-            },
-            "hero": {
-              "type": "image",
-              "url": airlineImageUrl,
-              'size': 'full',
-              'aspectRatio': '20:13',
-              'aspectMode': 'cover'
-            },
-            "body": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": airline
-                }
-              ]
-            },
-            "footer": {
-              "type": "box",
-              "layout": "vertical",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "詳細へ",
-                    "uri": airlineLiff
-                  }
-                }
-              ]
-            },
-            "styles": {
-              "header": {
-                "backgroundColor": "#00ffff"
-              },
-              "hero": {
-                "separator": true,
-                "separatorColor": "#000000"
-              },
-              "footer": {
-                "separator": true,
-                "separatorColor": "#000000"
-              }
-            }
-          }
-        ]
+      {
+        "type": "flex",
+        "altText": "プランを送信しました。",
+        "contents": {
+          "type": "carousel",
+          "contents": getPlanCarousel(jsonData)
+        }
       }
-    }
     ]);
 }
+
+
+
+const random = (min, max) => Math.floor(Math.random() * (max - min) + min)
+
+const getPlanJson = (jsonData) => {
+  // jsonデータからプランを取得
+  // LIFFで申込情報入力
+  const informationLiff = process.env.INFO_LIFF_URI;
+  // LIFFでツアー詳細
+  const tourLiff = process.env.TOUR_LIFF_URI + '?tour=' + encodeURIComponent(jsonData.tour);
+  // LIFFでホテル詳細
+  const hotelLiff = process.env.HOTEL_LIFF_URI + '?hotel=' + encodeURIComponent(jsonData.hotel);
+  // LIFFで航空会社詳細
+  const airlineLiff = process.env.AIRLINE_LIFF_URI + '?airline=' + encodeURIComponent(jsonData.airline);
+  return {
+    "type": "bubble",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": jsonData.tour
+        }
+      ]
+    },
+    "hero": {
+      "type": "image",
+      "url": jsonData.tourImageUrl,
+      'size': 'full',
+      'aspectRatio': '20:13',
+      'aspectMode': 'cover'
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": jsonData.price
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        
+        {
+          "type": "button",
+          "style": "primary",
+          "action": {
+            "type": "uri",
+            "label": "日程の詳細",
+            "uri": tourLiff
+          }
+        },
+        
+        {
+          "type": "button",
+          "style": "primary",
+          "action": {
+            "type": "uri",
+            "label": "宿泊先の詳細",
+            "uri": hotelLiff
+          }
+        },
+        
+        {
+          "type": "button",
+          "style": "primary",
+          "action": {
+            "type": "uri",
+            "label": "航空会社の詳細",
+            "uri": airlineLiff
+          }
+        },
+        
+        {
+          "type": "button",
+          "style": "primary",
+          "action": {
+            "type": "uri",
+            "label": "申込情報入力",
+            "uri": informationLiff
+          }
+        }
+      ]
+    },
+    "styles": {
+      "header": {
+        "backgroundColor": "#00ffff"
+      },
+      "hero": {
+        "separator": true,
+        "separatorColor": "#000000"
+      },
+      "footer": {
+        "separator": true,
+        "separatorColor": "#000000"
+      }
+    }
+  }
+}
+
+const getPlanCarousel = (jsonData) => {
+  const planJsons = []
+  for (let i = 0; i < 3; i++) {
+    const randomIndex = random(0, jsonData.length).toFixed(0)
+    planJsons.push(getPlanJson(jsonData[randomIndex]))
+    jsonData.splice(randomIndex, 1)
+  }
+  return planJsons
+}
+
+
 
 // リプロント
 function getRepromptMsg(speechInfo){
