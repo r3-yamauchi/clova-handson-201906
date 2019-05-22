@@ -59,7 +59,7 @@ module.exports = clova.Client
         } else if (place === "国内") {
           type = "domestic";
         } else {
-          placeSpeech.push(clova.SpeechBuilder.createSpeechText('聞き取れませんでした。もう一度お願いします。'));
+          placeSpeech.push(clova.SpeechBuilder.createSpeechText('聞き取れませんでした。もう一度お願いします。行き先は国内ですか？海外ですか？'));
           responseHelper.setSpeechList(placeSpeech);
           return;
         }
@@ -83,8 +83,8 @@ module.exports = clova.Client
         break;
         
       default:
-        responseHelper.setSimpleSpeech(clova.SpeechBuilder.createSpeechText('はいか、いいえで答えてください。'));
-        responseHelper.setReprompt(getRepromptMsg(clova.SpeechBuilder.createSpeechText('はいか、いいえで答えてください。')));
+        responseHelper.setSimpleSpeech(clova.SpeechBuilder.createSpeechText('行き先は国内ですか？海外ですか？'));
+        responseHelper.setReprompt(getRepromptMsg(clova.SpeechBuilder.createSpeechText('行き先は国内ですか？海外ですか？')));
         break;
     }
   })

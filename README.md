@@ -43,7 +43,7 @@ https://xxx.ngrok.io/linepay/reserve
 ・「CHANNEL_ACCESS_TOKEN」と「CHANNEL_SECRET」  
 「6」で生成した「アクセストークン」と「Channel Secret」  
 ・「LINEPAY_CHANNEL_ID」、「LINEPAY_CHANNEL_SECRET」、「LINEPAY_CONFIRM_URL」  
-任意、LINE Payのアカウントお持ちなら設定
+任意、LINE Payのアカウントお持ちなら設定  
 ・「残りのLIFF_URL」  
 「７」で作成したLIFF URL
 
