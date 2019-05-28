@@ -1,12 +1,14 @@
 const clova = require('@line/clova-cek-sdk-nodejs');
 const line = require('@line/bot-sdk');
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // ファイル読み込み
 require('dotenv').config();
 const lineBot = require('./messagingAPI/lineBot');
 const linePayConfirm = require('./linepay/linePayConfirm');
 const linePayReserve = require('./linepay/linePayReserve');
+const planApi = require('./api/plan');
 const clovaSkillHandler = require('./clova/clovaSkill');
 
 // LINE BOTの設定
@@ -28,6 +30,9 @@ app.post('/clova', clovaMiddleware, clovaSkillHandler);
 // LINE PAY
 app.get('/linepay/reserve', linePayReserve);
 app.use("/linepay/confirm", linePayConfirm);
+
+// API
+app.use("/api/plan", planApi);
 
 // LINE BOT
 app.post('/linebot', line.middleware(config), lineBot);
