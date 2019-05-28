@@ -19,7 +19,7 @@ module.exports = ( req, res ) => {
         amount: 1,
         currency: "JPY",
         orderId: uuid(),
-        confirmUrl: process.env.LINEPAY_CONFIRM_URL
+        confirmUrl: process.env.BASE_URL + "/linepay/confirm"
     }
 
     pay.reserve(options).then((response) => {
