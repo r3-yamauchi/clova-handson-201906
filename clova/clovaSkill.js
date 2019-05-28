@@ -120,11 +120,11 @@ const getPlanJson = (jsonData) => {
   // LIFFで申込情報入力
   const informationLiff = process.env.INFO_LIFF_URI;
   // LIFFでツアー詳細
-  const tourLiff = process.env.TOUR_LIFF_URI + '?tour=' + encodeURIComponent(jsonData.tour);
+  const tourLiff = process.env.TOUR_LIFF_URI + '?tour=' + jsonData.id;
   // LIFFでホテル詳細
-  const hotelLiff = process.env.HOTEL_LIFF_URI + '?hotel=' + encodeURIComponent(jsonData.hotel);
+  const hotelLiff = process.env.HOTEL_LIFF_URI + '?hotel=' + jsonData.id;
   // LIFFで航空会社詳細
-  const airlineLiff = process.env.AIRLINE_LIFF_URI + '?airline=' + encodeURIComponent(jsonData.airline);
+  const airlineLiff = process.env.AIRLINE_LIFF_URI + '?airline=' + jsonData.id;
   return {
     "type": "bubble",
     "header": {
