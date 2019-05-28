@@ -41,17 +41,7 @@ async function handleEvent(event, session) {
                 "contents": [
                   {
                     "type": "text",
-                    "text": "ハワイ３泊５日間の旅"
-                  }
-                ]
-              },
-              "body": {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
-                  {
-                    "type": "text",
-                    "text": "¥90,000"
+                    "text": "旅行代金：¥90,000"
                   }
                 ]
               },
@@ -75,7 +65,12 @@ async function handleEvent(event, session) {
           ]
         }
       }
+    } else {
+      echo = { type: 'text', text: '申し訳ありませんが、お返事できません。' }; 
     }
+  } else if (event.type === 'follow') {
+    echo = { type: 'text', text: 'トラベルプランを起動してください。あなたに合ったプランを提案します。' }; 
+  
   } else {
     echo = { type: 'text', text: '申し訳ありませんが、お返事できません。' }; 
   }
