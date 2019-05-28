@@ -16,6 +16,8 @@ ngrok http 3000
 
 
 5. CEKを設定する(スキル名：トラベルプラン)  
+・下記ファイルを対話モデルでPlaceスロット作成してアップロードする  
+./models/slottype_Place.tsv  
 ・下記ファイルを対話モデルでTravelPlaceIntentインテント作成してアップロードする  
 ./models/intent_TravelPlaceIntent.tsv  
 ・下記のようにExtensionサーバーのURLを設定  
@@ -42,6 +44,8 @@ https://xxx.ngrok.io/linepay/reserve
 「5」で設定したCEKのExtension ID  
 ・「CHANNEL_ACCESS_TOKEN」と「CHANNEL_SECRET」  
 「6」で生成した「アクセストークン」と「Channel Secret」  
+・「BASE_URL」
+https://xxx.ngrok.io
 ・「LINEPAY_CHANNEL_ID」、「LINEPAY_CHANNEL_SECRET」、「LINEPAY_CONFIRM_URL」  
 任意、LINE Payのアカウントお持ちなら設定  
 ・「残りのLIFF_URL」  
