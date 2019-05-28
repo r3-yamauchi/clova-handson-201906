@@ -1,7 +1,6 @@
 const clova = require('@line/clova-cek-sdk-nodejs');
 const line = require('@line/bot-sdk');
 const express = require('express');
-const bodyParser = require('body-parser');
 
 // ファイル読み込み
 require('dotenv').config();
