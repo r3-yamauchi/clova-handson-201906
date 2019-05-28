@@ -105,7 +105,7 @@ async function sendLineBot(userId, jsonData) {
         "altText": "プランを送信しました。",
         "contents": {
           "type": "carousel",
-          "contents": getPlanCarousel(jsonData)
+          "contents": await getPlanCarousel(jsonData)
         }
       }
     ]);
@@ -217,16 +217,35 @@ const getPlanJson = (jsonData) => {
   }
 }
 
-const getPlanCarousel = (jsonData) => {
+const getPlanCarousel = async(jsonData) => {
   const planJsons = []
+  const randomAry = await funcRandom(jsonData)
   for (let i = 0; i < 3; i++) {
-    const randomIndex = random(0, jsonData.length).toFixed(0)
-    planJsons.push(getPlanJson(jsonData[randomIndex]))
-    jsonData.splice(randomIndex, 1)
+    planJsons.push(getPlanJson(jsonData[randomAry[i]]))
   }
   return planJsons
 }
 
+// ランダム
+async function funcRandom(data){
+  let arr = [];
+  for (let i=0; i<data.length; i++) {
+    arr[i] = i;
+  }
+  let a = arr.length;
+ 
+  // ランダムアルゴリズム
+  while (a) {
+      let j = Math.floor( Math.random() * a );
+      let t = arr[--a];
+      arr[a] = arr[j];
+      arr[j] = t;
+  }
+   
+  // ランダムされた配列の要素を順番に表示する
+  await arr.forEach( function( value ) {} );
+  return arr;
+}
 
 
 // リプロント
