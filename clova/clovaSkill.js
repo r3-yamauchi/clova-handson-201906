@@ -162,7 +162,7 @@ const getPlanJson = (jsonData) => {
         
         {
           "type": "button",
-          "style": "primary",
+          "style": "secondary",
           "action": {
             "type": "uri",
             "label": "日程の詳細",
@@ -172,7 +172,7 @@ const getPlanJson = (jsonData) => {
         
         {
           "type": "button",
-          "style": "primary",
+          "style": "secondary",
           "action": {
             "type": "uri",
             "label": "宿泊先の詳細",
@@ -182,7 +182,7 @@ const getPlanJson = (jsonData) => {
         
         {
           "type": "button",
-          "style": "primary",
+          "style": "secondary",
           "action": {
             "type": "uri",
             "label": "航空会社の詳細",
