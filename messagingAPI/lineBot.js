@@ -25,7 +25,7 @@ async function handleEvent(event, session) {
   console.log(event);
   let echo = [];
   if (event.type === 'message') {
-    if(event.message.text === '支払い'){
+    if(event.message.text.substring(0, 4) === 'お支払い'){
       // 申し込み内容確認のflex
       echo = {
         "type": "flex",
