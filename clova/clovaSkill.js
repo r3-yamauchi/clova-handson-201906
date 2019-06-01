@@ -21,7 +21,7 @@ module.exports = clova.Client
     
     const speech = [
         clova.SpeechBuilder.createSpeechText('こんにちは！トラベルプランへようこそ。あなたに合った旅行プランをお探しします。行き先は国内ですか？海外ですか？')
-      ]
+      ];
     
     responseHelper.setSpeechList(speech);
     responseHelper.setReprompt(getRepromptMsg(clova.SpeechBuilder.createSpeechText('行き先は国内ですか？海外ですか？')));
@@ -111,9 +111,6 @@ async function sendLineBot(userId, jsonData) {
     ]);
 }
 
-
-
-const random = (min, max) => Math.floor(Math.random() * (max - min) + min)
 
 const getPlanJson = (jsonData) => {
   // jsonデータからプランを取得
@@ -214,17 +211,17 @@ const getPlanJson = (jsonData) => {
         "separatorColor": "#000000"
       }
     }
-  }
-}
+  };
+};
 
 const getPlanCarousel = async(jsonData) => {
-  const planJsons = []
-  const randomAry = await funcRandom(jsonData)
+  const planJsons = [];
+  const randomAry = await funcRandom(jsonData);
   for (let i = 0; i < 3; i++) {
-    planJsons.push(getPlanJson(jsonData[randomAry[i]]))
+    planJsons.push(getPlanJson(jsonData[randomAry[i]]));
   }
-  return planJsons
-}
+  return planJsons;
+};
 
 // ランダム
 async function funcRandom(data){
@@ -256,4 +253,3 @@ function getRepromptMsg(speechInfo){
   };
   return speechObject;
 }
-
